@@ -37,7 +37,7 @@ public class GroupOfCards {
     public void shuffle() {
         Collections.shuffle(cards);
     }
-
+    
     /**
      * @return the size of the group of cards
      */
@@ -51,5 +51,14 @@ public class GroupOfCards {
     public void setSize(int size) {
         this.size = size;
     }
+    
+    /**
+ * Sets the group of cards.
+ * @param cards the list of Card objects to set || ADDED setCards METHOD 
+ */
+    public void setCards(ArrayList<Card> cards) {
+        this.cards = cards;
+    }
 
+    
 }//end class
