@@ -29,13 +29,14 @@ public class UsernameValidator {
         return true;
     }
 
-    public static void checkUserName(String userName) {
-        try {
-            checkNull(userName);
-            hasNoSymbol(userName);
-        } catch (Exception e) {
-            System.out.println("Player registration rejected. "
-                    + "\nUsername Invalid.");
+    // Throws exception (if username invalid) to be caught in player 
+    public static void checkUserName(String userName) throws Exception {
+        if (!checkNull(userName)) {
+            throw new Exception("Invalid Username. \nCannot be null.");
+        }
+        if (!hasNoSymbol(userName)) {
+            throw new Exception("Invalid Username. "
+                    + "\nCannot include special characters.");
         }
     }
 }

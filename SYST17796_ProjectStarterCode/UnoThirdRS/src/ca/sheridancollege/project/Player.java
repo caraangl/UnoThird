@@ -5,19 +5,22 @@
  */
 package ca.sheridancollege.project;
 
+import java.util.Scanner;
+
 /**
- * A class that models each Player in the game. Players have an identifier, which should be unique.
+ * A class that models each Player in the game. Players have an identifier,
+ * which should be unique.
  *
  * @author dancye
  * @author Paul Bonenfant Jan 2020
  * @author Ryleigh Smith August 2025
  */
-public abstract class Player {
+public class Player {
 
     private String userName; // The unique name for this player
     private Integer score; // How many cards the player has
     private String password; // The player password
-    
+
     // Constructor 
     public Player() {
     }
@@ -26,9 +29,9 @@ public abstract class Player {
     public Player(String userName) {
         this.userName = userName;
     }
-    
+
     // Constructor that allows you to set player name and password 
-    public Player(String userName, String password){
+    public Player(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
@@ -42,31 +45,55 @@ public abstract class Player {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
+
     // Return the player score
     public int getScore() {
         return score;
     }
-    
+
     // Set the player score
     public void setScore(int score) {
         this.score = score;
     }
-    
+
     // Get the player password
     public String getPassword() {
         return password;
     }
-    
+
     // Set the player password
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    /**
-     * The method to be overridden when you subclass the Player class with your specific type of Player and filled in
-     * with logic to play your game.
-     */
-    public abstract void play();
+
+    // Method to register a player
+    // Catches excpetions thrown in username validator 
+    // and password validator classes
+    public static Player registerPlayer() {
+        Scanner input = new Scanner(System.in);
+        String userName;
+        String password;
+
+        while (true) {
+            System.out.println("Please enter a username: "
+                    + "\nNOTE: Username cannot inlcude special characters.");
+            userName = input.nextLine();
+
+            System.out.println("Please enter a password: "
+                    + "\nNOTE: Password cannot include special characters. "
+                    + "\nNOTE: Password must be 6 or more characters.");
+            password = input.nextLine();
+
+            try {
+                UsernameValidator.checkUserName(userName);
+                PasswordValidator.checkPasword(password);
+                System.out.println("Player Registered Successfully.");
+                return new Player(userName, password);
+            } catch (Exception e) {
+                System.out.println("Player Registration Rejected."
+                        + e.getMessage());
+            }
+        }
+    }
 
 }

@@ -22,13 +22,18 @@ public class PlayGame {
         System.out.println("Welcome to UNO! \nPlease select an option:");
         System.out.println("1. Play UNO!");
         System.out.println("2. Exit UNO!");
-        System.out.println("Type '1' or '2'.");
+        System.out.println("Type '1' or '2': ");
         
         int choice = input.nextInt();
         
         switch (choice){
             case 1:
-                // register players and start game
+                Game game = new Game();
+                Player player1 = Player.registerPlayer();
+                Player player2 = Player.registerPlayer();
+                game.getPlayers().add(player1);
+                game.getPlayers().add(player2);
+                game.playUno(); // rn this just prints a list of players
                 break;
             case 2:
                 System.out.println("Thanks for playing. \nGoodbye!");

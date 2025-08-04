@@ -29,13 +29,15 @@ public class PasswordValidator {
         return true;
     }
 
-    public static void checkPasword(String password) {
-        try {
-            checkPassLength(password);
-            hasNoSymbol(password);
-        } catch (Exception e) {
-            System.out.println("Player registration rejected. "
-                    + "\nPassword Invalid.");
+    // Throws exception (if password invalid) to be caught in player 
+    public static void checkPasword(String password) throws Exception {
+        if (!checkPassLength(password)) {
+            throw new Exception("Invalid Password. "
+                    + "\nMust be at least 6 characters.");
+        }
+        if (!hasNoSymbol(password)) {
+            throw new Exception("Invalid Password. "
+                    + "\nCannot include special characters.");
         }
     }
 }
