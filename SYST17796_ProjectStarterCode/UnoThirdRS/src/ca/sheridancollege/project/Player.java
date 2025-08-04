@@ -14,27 +14,33 @@ package ca.sheridancollege.project;
  */
 public abstract class Player {
 
-    private String name; // The unique name for this player
+    private String userName; // The unique name for this player
     private Integer score; // How many cards the player has
-    private String password;
+    private String password; // The player password
     
     // Constructor 
     public Player() {
     }
 
     // Constructor that allows you to set the player name
-    public Player(String name) {
-        this.name = name;
+    public Player(String userName) {
+        this.userName = userName;
+    }
+    
+    // Constructor that allows you to set player name and password 
+    public Player(String userName, String password){
+        this.userName = userName;
+        this.password = password;
     }
 
     // Return the player name
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
     // Set the player name
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     
     // Return the player score
