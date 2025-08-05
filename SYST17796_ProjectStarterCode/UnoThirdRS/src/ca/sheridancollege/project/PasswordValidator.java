@@ -1,16 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ca.sheridancollege.project;
 
 /**
- *
  * @author Ryleigh Smith August 2025
  */
+
 public class PasswordValidator {
 
-    // Returns true if the password length is greater or equal to 6
+    // Method returns true if the password length is greater or equal to 6.
     public static boolean checkPassLength(String password) {
         if (password.length() >= 6) {
             return true;
@@ -18,7 +14,7 @@ public class PasswordValidator {
         return false;
     }
 
-    // Returns true when password contains NO special characters
+    // Method returns true when the password contains NO special characters.
     public static boolean hasNoSymbol(String password) {
         for (int i = 0; i < password.length(); i++) {
             char c = password.charAt(i);
@@ -29,7 +25,7 @@ public class PasswordValidator {
         return true;
     }
 
-    // Throws exception (if password invalid) to be caught in player 
+    // Throws exception if password is invalid (to be caught in player class).
     public static void checkPasword(String password) throws Exception {
         if (!checkPassLength(password)) {
             throw new Exception("Invalid Password. "

@@ -1,19 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ca.sheridancollege.project;
-
 import java.util.ArrayList;
 
 /**
- *
  * @author Ryleigh Smith August 2025
  */
 
 public class Game {
 
-    private ArrayList<Player> players; // Players of the game
+    private ArrayList<Player> players; 
 
     public Game() {
         players = new ArrayList();
@@ -27,6 +21,8 @@ public class Game {
         this.players = players;
     }
     
+    // Placeholder method to start the game. 
+    // Only prints a list of players right now.
     public void playUno() {
         System.out.println("Game Start! "
                 + "\nCurrent Players:");

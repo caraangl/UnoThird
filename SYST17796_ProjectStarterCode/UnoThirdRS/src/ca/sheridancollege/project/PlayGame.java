@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ca.sheridancollege.project;
 import java.util.Scanner;
 
 /**
- *
  * @author Ryleigh Smith August 2025
  */
+
 public class PlayGame {
     
     public static void main(String[] args) {
@@ -33,7 +29,7 @@ public class PlayGame {
                 Player player2 = Player.registerPlayer();
                 game.getPlayers().add(player1);
                 game.getPlayers().add(player2);
-                game.playUno(); // rn this just prints a list of players
+                game.playUno(); // Currently this just prints a list of players
                 break;
             case 2:
                 System.out.println("Thanks for playing. \nGoodbye!");
