@@ -1,4 +1,5 @@
 package ca.sheridancollege.project;
+
 import java.util.Scanner;
 
 /**
@@ -6,23 +7,23 @@ import java.util.Scanner;
  */
 
 public class PlayGame {
-    
+
     public static void main(String[] args) {
         gameStart();
     }
-    
+
     // Method to start the game, lets user choose whether to play or exit.
     public static void gameStart() {
         Scanner input = new Scanner(System.in);
-        
+
         System.out.println("Welcome to UNO! \nPlease select an option:");
         System.out.println("1. Play UNO!");
         System.out.println("2. Exit UNO!");
         System.out.println("Type '1' or '2': ");
-        
+
         int choice = input.nextInt();
-        
-        switch (choice){
+
+        switch (choice) {
             case 1:
                 Game game = new Game();
                 Player player1 = Player.registerPlayer();
@@ -30,6 +31,13 @@ public class PlayGame {
                 game.getPlayers().add(player1);
                 game.getPlayers().add(player2);
                 game.playUno(); // Currently this just prints a list of players
+                GameStart gameStart = new GameStart();
+                gameStart.generateDeck();
+                System.out.println("Handing Out Cards...");
+                gameStart.generatePlayerHand(player1);
+                gameStart.generatePlayerHand(player1);
+                System.out.println("Player One Hand:");
+                player1.printHand();
                 break;
             case 2:
                 System.out.println("Thanks for playing. \nGoodbye!");
@@ -41,5 +49,3 @@ public class PlayGame {
         }
     }
 }
-
-

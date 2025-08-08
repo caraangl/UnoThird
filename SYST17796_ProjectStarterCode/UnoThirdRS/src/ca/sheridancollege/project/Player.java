@@ -9,6 +9,7 @@ public class Player {
     private String userName;
     private Integer score;
     private String password;
+    private UnoCard[] playerHand;
 
     public Player() {
     }
@@ -41,6 +42,10 @@ public class Player {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public void setPlayerHand(UnoCard[] playerHand) {
+        this.playerHand = playerHand;
+    }
 
     // Method to register a player.
     // Catches excpetions thrown in username & password validator classes.
@@ -68,6 +73,13 @@ public class Player {
                 System.out.println("Player Registration Rejected."
                         + e.getMessage());
             }
+        }
+    }
+    
+    // Print cards in players hand
+    public void printHand() {
+        for (UnoCard card : playerHand) {
+            System.out.println(card);
         }
     }
 }
