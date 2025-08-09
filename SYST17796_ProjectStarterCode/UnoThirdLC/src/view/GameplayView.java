@@ -7,6 +7,8 @@ package view;
 import java.util.Scanner;
 import model.UNOCard;
 import model.Player;
+import model.CardColour;
+import model.CardColourHelper;
 
 /**
  *
@@ -46,4 +48,28 @@ public class GameplayView {
             return promptCardSelection(player); // re-prompt until valid
         }
     }
+    
+    public CardColour promptColourSelection(Player player) {
+    CardColour[] colors = CardColour.values();  // get all colors
+
+    System.out.println("Please select a color:");
+
+    // Print options for the user
+    for (int i = 0; i < colors.length; i++) {
+        System.out.println(i + ": " + colors[i]);
+    }
+
+    int choice = -1;
+    while (choice < 0 || choice >= colors.length) {
+        System.out.print("Enter the number corresponding to your color choice: ");
+        try {
+            choice = Integer.parseInt(input.nextLine().trim());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input, please enter a number.");
+        }
+    }
+
+    return colors[choice];
 }
+}
+

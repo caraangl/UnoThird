@@ -19,6 +19,8 @@ import model.CardValueHelper;
 import view.GameplayView;
 import model.CardColourHelper;
 import model.CardValueHelper;
+import model.CardColour;
+import model.CardValue;
 
 
 /**
@@ -45,6 +47,7 @@ public class GameController
     
     private StockPile stockPile;
     private int currentPlayerIndex = 0;
+    private CardColour validColour;
     
     //GameController Class Constructor
     public GameController() 
@@ -116,7 +119,7 @@ public class GameController
         while (true) 
         {
         UNOCard card = deckController.drawCard();
-
+        
         if (!CardValueHelper.isAllowedAsStartingCard(card.getValue())) {
             System.out.println("Returnign Card: " + card);
             deckController.returnCardToDeck(card);
@@ -126,6 +129,7 @@ public class GameController
         }
 
         stockPile.addCard(card);
+        validColour = card.getColour();
         System.out.println("Starting card on stock pile: " + card);
         break;
         }
@@ -158,21 +162,77 @@ public class GameController
             playerView.showPlayerhand(currentPlayer);
             
             advanceTurn();
-        } else if (isValidPlay(selectedCard, topCard)) {
+        } 
+                else if (isValidPlay(selectedCard, topCard)) 
+        {
             System.out.println(currentPlayer.getUsername() + " played: " + selectedCard);
-            // Implement playing the card: update stock pile, remove from hand, etc.
             stockPile.addCard(selectedCard);
             handController.removeCardFromHand(currentPlayer, selectedCard);
             playerView.showPlayerhand(currentPlayer);
-            advanceTurn();
-        } 
+            
+            // If wild card, ask for color choice
+            if (CardColourHelper.isWild(selectedCard.getColour())) {
+                CardColour chosenColour = gameplayView.promptColourSelection(currentPlayer);
+                this.validColour = chosenColour;
+                System.out.println(currentPlayer.getUsername() + " changed color to " + chosenColour);
+            } else {
+                // For non-wild cards, validColour is the card's color
+                validColour = selectedCard.getColour();
+            }
+
+            // Handle all special card effects here regardless of color
+            switch (selectedCard.getValue()) {
+                case WILD_DRAW_FOUR:
+                    int nextPlayerIndex = (currentPlayerIndex + 1) % game.getPlayers().size();
+                    Player nextPlayer = game.getPlayers().get(nextPlayerIndex);
+                    for (int i = 0; i < 4; i++) {
+                        UNOCard draw = deckController.drawCard();
+                        handController.addCardToHand(nextPlayer, draw);
+                    }
+                    System.out.println(nextPlayer.getUsername() + " drew 4 cards and is skipped!");
+                    currentPlayerIndex = (currentPlayerIndex + 2) % game.getPlayers().size();
+                    continue;
+
+                case WILD:
+                    // Just color change, no skip or draw effect
+                    advanceTurn();
+                    break;
+
+                case SKIP:
+                    System.out.println("Skip played! Player skipped!");
+                    skipPlayer();
+                    continue;
+
+                case REVERSE:
+                    System.out.println("Reverse played! Player skipped!");
+                    skipPlayer();
+                    continue;
+
+                case DRAW_TWO:
+                    int nextPlayerIndex2 = (currentPlayerIndex + 1) % game.getPlayers().size();
+                    Player nextPlayer2 = game.getPlayers().get(nextPlayerIndex2);
+                    for (int i = 0; i < 2; i++) {
+                        UNOCard draw = deckController.drawCard();
+                        handController.addCardToHand(nextPlayer2, draw);
+                    }
+                    System.out.println(nextPlayer2.getUsername() + " drew 2 cards and is skipped!");
+                    skipPlayer();
+                    continue;
+
+                default:
+                    advanceTurn();
+                    break;
+            }
+        }    
         else 
         {
             System.out.println("Top card on the pile: " + topCard);
             System.out.println("Invalid card selection! Please select a card matching the color or value of the top card, or a Wild card.");
         }
-        }
     }
+}
+ 
+
     
     private Player getCurrentPlayer() 
     {
@@ -180,25 +240,36 @@ public class GameController
         return game.getPlayers().get(0); // example: always first player for now
     }
      
-    private boolean isValidPlay(UNOCard playedCard, UNOCard topCard) 
-    {
-        if (CardColourHelper.isWild(playedCard.getColour())) {
-            return true;
-        }
+private boolean isValidPlay(UNOCard playedCard, UNOCard topCard) {
+    System.out.println("Checking play validity:");
+    System.out.println("Played Card: " + playedCard);
+    System.out.println("Top Card: " + topCard);
+    System.out.println("Valid Colour: " + validColour);
 
-        if (CardColourHelper.isMatchingColour(playedCard.getColour(), topCard.getColour())) {
-            return true;
-        }
-
-        if (CardValueHelper.isMatchingValue(playedCard.getValue(), topCard.getValue())) {
-            return true;
-        }
-
-        return false;
+    if (CardColourHelper.isWild(playedCard.getColour())) {
+        return true;
     }
+
+    if (playedCard.getColour() == validColour) {
+        return true;
+    }
+
+    if (playedCard.getValue() == topCard.getValue()) {
+        return true;
+    }
+
+    return false;
+}
+
     private void advanceTurn() 
     {
         currentPlayerIndex = (currentPlayerIndex + 1) % game.getPlayers().size();
+    }
+    
+    private void skipPlayer()
+    {
+        advanceTurn();
+        advanceTurn();
     }
 }
 
