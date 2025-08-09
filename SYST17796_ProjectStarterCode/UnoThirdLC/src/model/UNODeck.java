@@ -31,4 +31,14 @@ public class UNODeck {
     public void setCardsInDeck(int count) {
         this.cardsInDeck = count;
     }
+    
+    public void addCardToTop(UNOCard card) {
+    if (cardsInDeck < cards.length) {
+        cards[cardsInDeck] = card;  // add card at the end (top)
+        cardsInDeck++;
+    } else {
+        System.out.println("Deck is full! Cannot add card back.");
+    }
+}
+
 }

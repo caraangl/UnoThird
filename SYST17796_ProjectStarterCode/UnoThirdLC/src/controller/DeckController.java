@@ -104,4 +104,8 @@ public class DeckController {
         }
         return drawnCards;
     }
+    
+    public void returnCardToDeck(UNOCard card) {
+        deck.addCardToTop(card);
+    }
 }

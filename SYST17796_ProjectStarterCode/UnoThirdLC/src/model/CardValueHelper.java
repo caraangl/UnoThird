@@ -16,4 +16,19 @@ public class CardValueHelper
         {
             return cardValues[i];
         }
+
+    public static boolean isAllowedAsStartingCard(CardValue value) {
+        switch(value) 
+        {
+            case WILD:
+            case WILD_DRAW_FOUR:
+            case DRAW_TWO:
+            case SKIP:
+            case REVERSE:
+                return false;
+            default:
+                return true;
+        }
+    }
 }
+

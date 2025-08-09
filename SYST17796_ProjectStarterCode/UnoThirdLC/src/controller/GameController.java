@@ -14,6 +14,9 @@ import view.PlayerView;
 import model.Game;
 import model.UNOCard;
 import model.UNODeck;
+import model.StockPile;
+import model.CardValueHelper;
+
 
 /**
  * GameController controls the main core Gameplay of UNO (Checking Hands, Verifying Cards)
@@ -35,6 +38,7 @@ public class GameController
     private final DeckController deckController;
     private HandController handController;
     
+    private StockPile stockPile;
     //GameController Class Constructor
     public GameController() 
     {
@@ -51,8 +55,10 @@ public class GameController
         deckOfCards = new UNODeck();
         deckController = new DeckController(deckOfCards);
         handController = new HandController (deckController, playerView);
+        
+        stockPile = new StockPile(); 
     }
-    
+        
     //startGame - Based on number players, Register the Players using playerController
     public void startGame(int numPlayers) 
     {
@@ -69,6 +75,7 @@ public class GameController
         /////////////////////
         generateDeck();
         dealInitialHands();
+        startStockPile();
     }
     
     ////////////////////
@@ -76,7 +83,7 @@ public class GameController
     {
         System.out.println("Shuffling Deck...");
         deckController.reset();    // Build the deck
-        //deckController.shuffle();  // Shuffle the deck
+        deckController.shuffle();  // Shuffle the deck
           // for testing purposes to make sure deck was working
          for (UNOCard card : deckOfCards.getCards()) 
         {
@@ -93,7 +100,28 @@ public class GameController
         }
     } 
     
-   
+    public void startStockPile() 
+    {
+        while (true) {
+        UNOCard card = deckController.drawCard();
+
+        if (!CardValueHelper.isAllowedAsStartingCard(card.getValue())) {
+            System.out.println("Returnign Card: " + card);
+            deckController.returnCardToDeck(card);
+            
+            deckController.shuffle();
+            continue;
+        }
+
+        stockPile.addCard(card);
+        System.out.println("Starting card on stock pile: " + card);
+        break;
+}
+
+        //UNOCard currentCard = stockPile.getTopCard();
+        //System.out.println("Current card in play: " + currentCard);
+
+    }
 
 
 }
