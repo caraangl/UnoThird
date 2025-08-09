@@ -170,6 +170,15 @@ public class GameController
             handController.removeCardFromHand(currentPlayer, selectedCard);
             playerView.showPlayerhand(currentPlayer);
             
+            int cardsLeft = currentPlayer.getPlayerHand().length;
+            currentPlayer.setScore(cardsLeft);
+            System.out.println(currentPlayer.getUsername() + "'s score (cards left): " + cardsLeft);
+
+            if (cardsLeft == 0) {
+                System.out.println(currentPlayer.getUsername() + " has won the game! Congratulations!");
+                break;  // Exit gameplay loop
+            }
+            
             // If wild card, ask for color choice
             if (CardColourHelper.isWild(selectedCard.getColour())) {
                 CardColour chosenColour = gameplayView.promptColourSelection(currentPlayer);

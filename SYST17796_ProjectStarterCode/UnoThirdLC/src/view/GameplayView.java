@@ -49,18 +49,18 @@ public class GameplayView {
         }
     }
     
-    public CardColour promptColourSelection(Player player) {
+public CardColour promptColourSelection(Player player) {
     CardColour[] colors = CardColour.values();  // get all colors
 
     System.out.println("Please select a color:");
 
-    // Print options for the user
-    for (int i = 0; i < colors.length; i++) {
+    // Print options for the user, excluding WILD (assumed last)
+    for (int i = 0; i < colors.length - 1; i++) {
         System.out.println(i + ": " + colors[i]);
     }
 
     int choice = -1;
-    while (choice < 0 || choice >= colors.length) {
+    while (choice < 0 || choice >= colors.length - 1) {  // validate only within RED, YELLOW, GREEN, BLUE
         System.out.print("Enter the number corresponding to your color choice: ");
         try {
             choice = Integer.parseInt(input.nextLine().trim());
@@ -71,5 +71,6 @@ public class GameplayView {
 
     return colors[choice];
 }
+
 }
 
