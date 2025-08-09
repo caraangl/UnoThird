@@ -8,10 +8,20 @@ package model;
  *
  * @author mohamedhamed
  */
-enum CardColour {
-    RED,
-    YELLOW,
-    GREEN,
-    BLUE,
-    WILD // Used for Wild and Wild Draw Four cards
+public enum CardValue {
+    ZERO,
+    ONE,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    SEVEN,
+    EIGHT,
+    NINE,
+    SKIP,
+    REVERSE,
+    DRAW_TWO,
+    WILD,
+    WILD_DRAW_FOUR
 }
