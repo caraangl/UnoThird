@@ -4,6 +4,9 @@
  */
 package controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import model.Player;
 import model.UNOCard;
 import view.PlayerView;
@@ -28,4 +31,21 @@ public class HandController {
         player.setPlayerHand(hand);
         playerView.showPlayerhand(player);
     } 
+    
+    public void removeCardFromHand(Player player, UNOCard card) {
+        UNOCard[] hand = player.getPlayerHand();
+        List<UNOCard> handList = new ArrayList<>(Arrays.asList(hand));
+        if (handList.remove(card)) {
+            player.setPlayerHand(handList.toArray(new UNOCard[0]));
+        }
+    }
+    
+    public void addCardToHand(Player player, UNOCard card) {
+    // Assuming Player class has getPlayerHand() returning a List or array
+    // If playerHand is an array, you might want to convert to List or manage resizing
+    List<UNOCard> hand = new ArrayList<>(Arrays.asList(player.getPlayerHand()));
+    hand.add(card);
+    player.setPlayerHand(hand.toArray(new UNOCard[0]));
+}
+
 }

@@ -18,4 +18,12 @@ public class CardColourHelper {
     {
         return cardColours[i];
     }
+    
+    public static boolean isWild(CardColour colour) {
+        return colour == CardColour.WILD;
+    }
+
+    public static boolean isMatchingColour(CardColour c1, CardColour c2) {
+        return c1 == c2;
+    }
 }

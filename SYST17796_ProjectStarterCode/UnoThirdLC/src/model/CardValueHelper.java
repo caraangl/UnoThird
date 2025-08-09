@@ -30,5 +30,17 @@ public class CardValueHelper
                 return true;
         }
     }
+    
+     public static boolean isMatchingValue(CardValue v1, CardValue v2) {
+        return v1 == v2;
+    }
+    
+    public static boolean isSpecialCard(CardValue value) {
+        return value == CardValue.SKIP || value == CardValue.REVERSE || value == CardValue.DRAW_TWO;
+    }
+    
+    public static boolean isWild(CardValue value) {
+        return value == CardValue.WILD || value == CardValue.WILD_DRAW_FOUR;
+    }
 }
 

@@ -16,6 +16,9 @@ import model.UNOCard;
 import model.UNODeck;
 import model.StockPile;
 import model.CardValueHelper;
+import view.GameplayView;
+import model.CardColourHelper;
+import model.CardValueHelper;
 
 
 /**
@@ -32,13 +35,17 @@ public class GameController
     
     //View Variables
     private PlayerView playerView;
+    private GameplayView gameplayView;
     
     ////////////////////////
     private final UNODeck deckOfCards;
     private final DeckController deckController;
     private HandController handController;
+     private Player currentPlayer;
     
     private StockPile stockPile;
+    private int currentPlayerIndex = 0;
+    
     //GameController Class Constructor
     public GameController() 
     {
@@ -47,6 +54,7 @@ public class GameController
         
         //playerView View Variable
         playerView = new PlayerView(input);
+        gameplayView = new GameplayView(input);
         
         //playerController Controller Variable
         playerController = new PlayerController(playerView);
@@ -56,7 +64,9 @@ public class GameController
         deckController = new DeckController(deckOfCards);
         handController = new HandController (deckController, playerView);
         
-        stockPile = new StockPile(); 
+        stockPile = new StockPile();
+        
+        
     }
         
     //startGame - Based on number players, Register the Players using playerController
@@ -76,6 +86,7 @@ public class GameController
         generateDeck();
         dealInitialHands();
         startStockPile();
+        gameplay();
     }
     
     ////////////////////
@@ -102,7 +113,8 @@ public class GameController
     
     public void startStockPile() 
     {
-        while (true) {
+        while (true) 
+        {
         UNOCard card = deckController.drawCard();
 
         if (!CardValueHelper.isAllowedAsStartingCard(card.getValue())) {
@@ -116,13 +128,79 @@ public class GameController
         stockPile.addCard(card);
         System.out.println("Starting card on stock pile: " + card);
         break;
-}
-
+        }
+        
         //UNOCard currentCard = stockPile.getTopCard();
         //System.out.println("Current card in play: " + currentCard);
-
     }
+    
+    public void gameplay()
+    {
+        // Get current player (implement your logic to get this)
+        while (true) {
+            
+        currentPlayer =  game.getPlayers().get(currentPlayerIndex);
+        UNOCard topCard = stockPile.getTopCard();
+        
+        System.out.println("Top card on the pile: " + topCard);
+        System.out.println("It's " + currentPlayer.getUsername() + "'s turn.");
+        UNOCard selectedCard = gameplayView.promptCardSelection(currentPlayer);
 
+        if (selectedCard == null) {
+            System.out.println(currentPlayer.getUsername() + " chose to draw a card.");
+            // Implement draw card logic here
+             // Draw one card from the deck
+            UNOCard drawnCard = deckController.drawCard();
+            System.out.println(currentPlayer.getUsername() + " drew " + drawnCard);
+            // Add the drawn card to the player's hand
+            handController.addCardToHand(currentPlayer, drawnCard);
+            
+            playerView.showPlayerhand(currentPlayer);
+            
+            advanceTurn();
+        } else if (isValidPlay(selectedCard, topCard)) {
+            System.out.println(currentPlayer.getUsername() + " played: " + selectedCard);
+            // Implement playing the card: update stock pile, remove from hand, etc.
+            stockPile.addCard(selectedCard);
+            handController.removeCardFromHand(currentPlayer, selectedCard);
+            playerView.showPlayerhand(currentPlayer);
+            advanceTurn();
+        } 
+        else 
+        {
+            System.out.println("Top card on the pile: " + topCard);
+            System.out.println("Invalid card selection! Please select a card matching the color or value of the top card, or a Wild card.");
+        }
+        }
+    }
+    
+    private Player getCurrentPlayer() 
+    {
+        // implement your current player retrieval logic
+        return game.getPlayers().get(0); // example: always first player for now
+    }
+     
+    private boolean isValidPlay(UNOCard playedCard, UNOCard topCard) 
+    {
+        if (CardColourHelper.isWild(playedCard.getColour())) {
+            return true;
+        }
 
+        if (CardColourHelper.isMatchingColour(playedCard.getColour(), topCard.getColour())) {
+            return true;
+        }
+
+        if (CardValueHelper.isMatchingValue(playedCard.getValue(), topCard.getValue())) {
+            return true;
+        }
+
+        return false;
+    }
+    private void advanceTurn() 
+    {
+        currentPlayerIndex = (currentPlayerIndex + 1) % game.getPlayers().size();
+    }
 }
+
+
 
