@@ -8,7 +8,7 @@ package model;
  *
  * @author mohamedhamed
  */
-enum CardColour {
+public enum CardColour {
     RED,
     YELLOW,
     GREEN,

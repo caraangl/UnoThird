@@ -12,6 +12,8 @@ import model.Player;
 import model.UsernameValidator;
 import view.PlayerView;
 import model.Game;
+import model.UNOCard;
+import model.UNODeck;
 
 /**
  * GameController controls the main core Gameplay of UNO (Checking Hands, Verifying Cards)
@@ -28,6 +30,11 @@ public class GameController
     //View Variables
     private PlayerView playerView;
     
+    ////////////////////////
+    private final UNODeck deckOfCards;
+    private final DeckController deckController;
+    
+    
     //GameController Class Constructor
     public GameController() 
     {
@@ -39,6 +46,10 @@ public class GameController
         
         //playerController Controller Variable
         playerController = new PlayerController(playerView);
+        
+        ///////////////////////
+        this.deckOfCards = new UNODeck();
+        this.deckController = new DeckController(deckOfCards);
     }
     
     //startGame - Based on number players, Register the Players using playerController
@@ -53,6 +64,30 @@ public class GameController
         
         //Calls playerView's showRegisteredPlayers method to display the players
         playerView.showRegisteredPlayers(game); 
+        
+        /////////////////////
+        generateDeck();
     }
+    
+    ////////////////////
+    public void generateDeck() 
+    {
+        System.out.println("Shuffling Deck...");
+        deckController.reset();    // Build the deck
+        //deckController.shuffle();  // Shuffle the deck
+          // for testing purposes to make sure deck was working
+         for (UNOCard card : deckOfCards.getCards()) 
+        {
+            System.out.println(card);
+        }
+    }
+    
+        // Method to generate initial hand 
+    /*public void generatePlayerHand(Player player) {
+        UNOCard[] hand = deckController.drawCard(7);
+        player.setPlayerHand(hand);
+    } */
+
+
 }
 
