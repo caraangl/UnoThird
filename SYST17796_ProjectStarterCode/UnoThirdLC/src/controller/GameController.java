@@ -33,7 +33,7 @@ public class GameController
     ////////////////////////
     private final UNODeck deckOfCards;
     private final DeckController deckController;
-    
+    private HandController handController;
     
     //GameController Class Constructor
     public GameController() 
@@ -48,8 +48,9 @@ public class GameController
         playerController = new PlayerController(playerView);
         
         ///////////////////////
-        this.deckOfCards = new UNODeck();
-        this.deckController = new DeckController(deckOfCards);
+        deckOfCards = new UNODeck();
+        deckController = new DeckController(deckOfCards);
+        handController = new HandController (deckController, playerView);
     }
     
     //startGame - Based on number players, Register the Players using playerController
@@ -67,6 +68,7 @@ public class GameController
         
         /////////////////////
         generateDeck();
+        dealInitialHands();
     }
     
     ////////////////////
@@ -83,10 +85,15 @@ public class GameController
     }
     
         // Method to generate initial hand 
-    /*public void generatePlayerHand(Player player) {
-        UNOCard[] hand = deckController.drawCard(7);
-        player.setPlayerHand(hand);
-    } */
+    public void dealInitialHands() 
+    {
+        for (Player player : game.getPlayers())
+        {
+            handController.generatePlayerHand(player);
+        }
+    } 
+    
+   
 
 
 }

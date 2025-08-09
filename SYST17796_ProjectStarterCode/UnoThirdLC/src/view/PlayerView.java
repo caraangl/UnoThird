@@ -8,6 +8,7 @@ package view;
 import java.util.Scanner;
 import model.Player;
 import model.Game;
+import model.UNOCard;
 
 /**
  * PlayerView displays all output's and messages as well as sends the user inputs for Player Registration
@@ -60,4 +61,12 @@ public class PlayerView
         System.out.println("\nCurrent Players:");
         System.out.println(game.getPlayersString());
     }
+    
+    public void showPlayerhand(Player player)
+{
+    System.out.println("\n" + player.getUsername() + "'s hand:");
+    for (UNOCard card : player.getPlayerHand()) {
+        System.out.println(card); // relies on UNOCard.toString()
+    }
+}
 }

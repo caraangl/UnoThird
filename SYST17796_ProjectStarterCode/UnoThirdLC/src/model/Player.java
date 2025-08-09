@@ -6,20 +6,21 @@ import java.util.Scanner;
  */
 public class Player {
 
-    private String userName;
+    private String username;
     private Integer score;
     private String password;
+    private UNOCard[] playerHand;
 
     public Player() {
     }
 
-    public Player(String userName, String password) {
-        this.userName = userName;
+    public Player(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     public int getScore() {
@@ -30,8 +31,8 @@ public class Player {
         return password;
     }
 
-    public void setUsername(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setScore(int score) {
@@ -41,4 +42,14 @@ public class Player {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public void setPlayerHand(UNOCard[] playerHand) {
+        this.playerHand = playerHand;
+    }
+    
+    public UNOCard[] getPlayerHand()
+    {
+        return playerHand;
+    }
+
 }
