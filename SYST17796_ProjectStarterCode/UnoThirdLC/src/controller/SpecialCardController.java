@@ -67,6 +67,7 @@ public class SpecialCardController
                 break;
             //If it is a DRAW_TWO card, call the handleDrawTwo Method, and then Skip the Player
             case DRAW_TWO:
+                gameController.setValidColour(card.getColour());
                 handleDrawTwo(currentPlayer);
                 gameController.skipPlayer();
                 break;
