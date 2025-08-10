@@ -9,25 +9,24 @@ package model;
  * @author LianL
  */
 public class UNOCard {
+
     private final CardColour cardColour;
     private final CardValue cardValue;
-    
-    public UNOCard(CardColour cardColour, CardValue cardValue)
-    {
+
+    public UNOCard(CardColour cardColour, CardValue cardValue) {
         this.cardColour = cardColour;
         this.cardValue = cardValue;
     }
-    
-    public CardColour getColour()
-    {
+
+    public CardColour getColour() {
         return this.cardColour;
     }
-    
-    public CardValue getValue(){
+
+    public CardValue getValue() {
         return this.cardValue;
     }
-    
-    public String toString(){
+
+    public String toString() {
         return cardColour + " " + cardValue;
     }
 }

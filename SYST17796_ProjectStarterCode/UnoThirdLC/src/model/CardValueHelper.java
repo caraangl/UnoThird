@@ -8,18 +8,16 @@ package model;
  *
  * @author LianL
  */
-public class CardValueHelper 
-{
+public class CardValueHelper {
+
     private static final CardValue[] cardValues = CardValue.values();
-    
-        public static CardValue getValue(int i) 
-        {
-            return cardValues[i];
-        }
+
+    public static CardValue getValue(int i) {
+        return cardValues[i];
+    }
 
     public static boolean isAllowedAsStartingCard(CardValue value) {
-        switch(value) 
-        {
+        switch (value) {
             case WILD:
             case WILD_DRAW_FOUR:
             case DRAW_TWO:
@@ -30,17 +28,16 @@ public class CardValueHelper
                 return true;
         }
     }
-    
-     public static boolean isMatchingValue(CardValue v1, CardValue v2) {
+
+    public static boolean isMatchingValue(CardValue v1, CardValue v2) {
         return v1 == v2;
     }
-    
+
     public static boolean isSpecialCard(CardValue value) {
         return value == CardValue.SKIP || value == CardValue.REVERSE || value == CardValue.DRAW_TWO;
     }
-    
+
     public static boolean isWild(CardValue value) {
         return value == CardValue.WILD || value == CardValue.WILD_DRAW_FOUR;
     }
 }
-

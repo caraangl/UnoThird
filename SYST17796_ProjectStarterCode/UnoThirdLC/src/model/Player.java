@@ -1,4 +1,5 @@
 package model;
+
 import java.util.Scanner;
 
 /**
@@ -42,13 +43,12 @@ public class Player {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public void setPlayerHand(UNOCard[] playerHand) {
         this.playerHand = playerHand;
     }
-    
-    public UNOCard[] getPlayerHand()
-    {
+
+    public UNOCard[] getPlayerHand() {
         return playerHand;
     }
 

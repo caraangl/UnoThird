@@ -12,33 +12,30 @@ import java.util.List;
  * @author LianL
  */
 public class StockPile {
+
     private final List<UNOCard> stockPile;
-    
-    public StockPile()
-    {
+
+    public StockPile() {
         stockPile = new ArrayList<>();
     }
-    public void addCard(UNOCard card) 
-    {
+
+    public void addCard(UNOCard card) {
         stockPile.add(card);
     }
 
-    public UNOCard getTopCard() 
-    {
+    public UNOCard getTopCard() {
         if (stockPile.isEmpty()) {
             return null;
         }
         return stockPile.get(stockPile.size() - 1);
     }
 
-
     public void clear() {
         stockPile.clear();
     }
-    
-     // Get all cards (optional)
-    public List<UNOCard> getAllCards() 
-    {
+
+    // Get all cards (optional)
+    public List<UNOCard> getAllCards() {
         return new ArrayList<>(stockPile);
     }
 }
