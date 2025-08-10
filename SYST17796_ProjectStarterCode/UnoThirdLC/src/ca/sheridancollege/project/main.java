@@ -9,8 +9,8 @@ package ca.sheridancollege.project;
 import controller.StartController;
 
 /**
- *
- * @author Lian Asher Caraang, August 2025
+ * UNO APPLICATION
+ * @author Lian Asher Caraang, Ryleigh Smith, Cuong Luong, Mohamed Hamed August 2025
  */
 public class main {
 
