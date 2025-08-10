@@ -11,121 +11,178 @@ import model.CardColour;
 import model.CardColourHelper;
 
 /**
+ * GameplayView displays all gameplay messages as well as sends the user inputs for 
+ * Gameplay Mechanics 
  *
- * @author LianL
+ * @author Lian Asher Caraang August 2025
  */
-public class GameplayView {
-
+public class GameplayView 
+{
+    //Input Variable
     Scanner input = new Scanner(System.in);
 
     //PlayerView Constructor
-    public GameplayView(Scanner input) {
+    public GameplayView(Scanner input) 
+    {
         this.input = input;
     }
-
-    public UNOCard promptCardSelection(Player player) {
+    
+    //Displays a prompt for the user to input which card they want to play
+    public UNOCard promptCardSelection(Player player) 
+    {
+        //Hand Variable - Calling the player's getPlayerHand method
         UNOCard[] hand = player.getPlayerHand();
-
+        
         System.out.println("\n" + player.getUsername() + ", it's your turn.");
         System.out.println("Your hand:");
 
-        // List cards with indices
-        for (int i = 0; i < hand.length; i++) {
+        //List the Player's Hand of Cards
+        for (int i = 0; i < hand.length; i++) 
+        {
             System.out.println(i + ": " + hand[i]);
         }
+        
+        //Display the choice to draw a card
         System.out.println(hand.length + ": Draw a card");
-
+        
+        //Asking for User Input
         System.out.print("Select a card index to play or draw a card: ");
         int choice = input.nextInt();
-        input.nextLine();  // consume newline
-
-        if (choice == hand.length) {
-            return null; // signifies draw card
-        } else if (choice >= 0 && choice < hand.length) {
+        input.nextLine();  
+        
+        //Return the User's Choice to the Controller
+        if (choice == hand.length) 
+        {
+            //Signifying the action of drawing a card
+            return null; 
+        } 
+        else if (choice >= 0 && choice < hand.length) 
+        {
             return hand[choice];
-        } else {
+        } 
+        else 
+        {
+            //If the user inputs a number that doesn't match the hand 
             System.out.println("Invalid choice.");
-            return promptCardSelection(player); // re-prompt until valid
+            //Rerun the Method Until the Choice is Accepted
+            return promptCardSelection(player); 
         }
     }
+    
+    //Asks the User to select a colour if they play a wild card
+    public CardColour promptColourSelection(Player player) 
+    {
+        //Retrieves all of the available colour values
+        CardColour[] colours = CardColour.values();  
+        
+        //Prompt
+        System.out.println("Please select a colour:");
 
-    public CardColour promptColourSelection(Player player) {
-        CardColour[] colors = CardColour.values();  // get all colors
-
-        System.out.println("Please select a color:");
-
-        // Print options for the user, excluding WILD (assumed last)
-        for (int i = 0; i < colors.length - 1; i++) {
-            System.out.println(i + ": " + colors[i]);
+        //Display options for the player
+        for (int i = 0; i < colours.length - 1; i++) {
+            System.out.println(i + ": " + colours[i]);
         }
-
+        
         int choice = -1;
-        while (choice < 0 || choice >= colors.length - 1) {  // validate only within RED, YELLOW, GREEN, BLUE
+        
+        //Validating to check if the index inputted is valid, must be RED, YELLOW, GREEN, BLUE
+        while (choice < 0 || choice >= colours.length - 1) 
+        {  
             System.out.print("Enter the number corresponding to your color choice: ");
-            try {
+            
+            try 
+            {
                 choice = Integer.parseInt(input.nextLine().trim());
-            } catch (NumberFormatException e) {
+            } 
+            catch (NumberFormatException e) 
+            {
                 System.out.println("Invalid input, please enter a number.");
             }
         }
 
-        return colors[choice];
+        return colours[choice];
     }
-
-    public void showCardPlayed(Player currentPlayer, UNOCard selectedCard) {
+    
+    //Displaying the card played 
+    public void showCardPlayed(Player currentPlayer, UNOCard selectedCard) 
+    {
         System.out.println(currentPlayer.getUsername() + " played: " + selectedCard);
     }
-
-    public void showTopCard(UNOCard topCard) {
+    
+    //Displaying the top card in the deck, the most recently played card
+    public void showTopCard(UNOCard topCard) 
+    {
         System.out.println("\nTop card on the pile: " + topCard);
     }
-
-    public void showPlayerTurn(Player currentPlayer) {
+    
+    //Displaying which player's turn it is
+    public void showPlayerTurn(Player currentPlayer) 
+    {
         System.out.println("It's " + currentPlayer.getUsername() + "'s turn.");
     }
-
+    
+    //Displaying shuffling the deck to the players
     public void showShufflingDeck() {
         System.out.println("Shuffling Deck...");
     }
-
-    public void showPlayerDrewCard(Player currentPlayer, UNOCard drawnCard) {
+    
+    //Displaying if the player drew a card and what card it is 
+    public void showPlayerDrewCard(Player currentPlayer, UNOCard drawnCard) 
+    {
         System.out.println(currentPlayer.getUsername() + " chose to draw a card and drew " + drawnCard + ".");
     }
-
-    public void showPlayerScore(Player currentPlayer, int cardsLeft) {
+    
+    //Displaying current player's score based on the cards left
+    public void showPlayerScore(Player currentPlayer, int cardsLeft) 
+    {
         System.out.println("\n" + currentPlayer.getUsername() + "'s score (cards left): " + cardsLeft);
-
-        if (cardsLeft == 0) {
+        
+        //If the score is 0 then display a winner
+        if (cardsLeft == 0) 
+        {
             System.out.println(currentPlayer.getUsername() + " has won the game! Congratulations!");
         }
     }
-
+    
+    //Displaying invalid selection, display the most recent card and colour
     public void showInvalidSelection(UNOCard topCard, CardColour validColour) {
         showTopCard(topCard);
         System.out.println("Current valid color: " + validColour);
         System.out.println("Invalid card selection! Please select a card matching the color or value of the top card, or a Wild card.");
     }
-
-    // In GameplayView.java
-    public void showSkipPlayed() {
+    
+    //Displaying if the skip card is used
+    public void showSkipPlayed() 
+    {
         System.out.println("Skip played! Player skipped!");
     }
-
-    // In GameplayView.java
-    public void showReversePlayed() {
+    
+    //Displaying if the reverse card is used
+    public void showReversePlayed() 
+    {
         System.out.println("Reverse played! (Skipping next player in 2-player mode)");
     }
-
-    public void showPlayerDrewCards(Player player, int numberOfCards) {
+    
+    //Displaying if the player was forced to draw cards
+    public void showPlayerDrewCards(Player player, int numberOfCards) 
+    {
         System.out.println(player.getUsername() + " drew " + numberOfCards + " cards!");
     }
-
-    public void showColorChanged(Player player, CardColour chosenColour) {
+    
+    //Displaying the new colour after a wild card was played
+    public void showColorChanged(Player player, CardColour chosenColour) 
+    {
         System.out.println(player.getUsername() + " changed color to " + chosenColour);
     }
-
+    
+    //Displaying player drew 2 cards
     public void showPlayerDrewTwoCards(Player player) {
         System.out.println(player.getUsername() + " drew 2 cards!");
+    }   
+    
+    //Displaying invalid choice if the user inputs an invalid value
+    public void showInvalidChoice() 
+    {
+        System.out.println("Invalid Choice");
     }
-
 }

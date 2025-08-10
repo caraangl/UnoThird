@@ -6,12 +6,13 @@ package model;
 
 /**
  *
- * @author mohamedhamed
+ * @author Mohamed Hamed - CardColour Enumeration needed for the UNO Cards
  */
-public enum CardColour {
+public enum CardColour 
+{
     RED,
     YELLOW,
     GREEN,
     BLUE,
-    WILD // Used for Wild and Wild Draw Four cards
+    WILD //Used for Wild and Wild Draw Four cards
 }

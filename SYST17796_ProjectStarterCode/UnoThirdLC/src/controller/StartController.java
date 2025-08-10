@@ -10,6 +10,7 @@ import model.Game;
 import view.StartView;
 import java.util.Scanner;
 import view.PlayerView;
+import model.UserInput;
 
 /**
  * StartController controls the application startup, and gives the user a choice
@@ -17,8 +18,8 @@ import view.PlayerView;
  *
  * @author Lian Asher Caraang
  */
-public class StartController {
-
+public class StartController 
+{
     //View Variables
     private StartView startView;
     private PlayerView playerView;
@@ -34,7 +35,8 @@ public class StartController {
     int numPlayers = 2;
 
     //StartController Class Constructor
-    public StartController() {
+    public StartController() 
+    {
     }
 
     //startApp Method to call the Initial Startup Messages
@@ -49,9 +51,26 @@ public class StartController {
         Scanner input = new Scanner(System.in);
 
         //startChoice Input Variable
-        int startChoice = input.nextInt();
-        input.nextLine();
-
+        //int startChoice = input.nextInt();
+        //input.nextLine();
+        
+        //Checking for Input Validation
+        Boolean start = null;
+        
+        while (start == null) 
+        {
+            start = UserInput.promptStartOrExit(input);
+            
+            if (start == null) 
+            {
+                startView.showInvalidMessage();  //Call the showInvalidMessage method from the startView
+                startView.showWelcomeMessage();  //Call the showWelcomeMessage method from the startView until the input is valid
+            }
+        }
+        
+        //Set the variable to 1 or 2 depending on the valid user input
+        int startChoice = start ? 1:2;
+            
         //If user chooses option 1, game will start, otherwise option 2 will exit the application. 
         switch (startChoice) {
             case 1:

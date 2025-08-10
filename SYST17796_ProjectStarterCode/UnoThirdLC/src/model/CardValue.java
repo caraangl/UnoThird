@@ -6,9 +6,10 @@ package model;
 
 /**
  *
- * @author mohamedhamed
+ * @author Mohamed Hamed - CardValue Enumeration needed for the UNO Cards
  */
-public enum CardValue {
+public enum CardValue 
+{
     ZERO,
     ONE,
     TWO,

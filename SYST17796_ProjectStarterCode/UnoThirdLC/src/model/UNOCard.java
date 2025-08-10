@@ -6,26 +6,35 @@ package model;
 
 /**
  *
- * @author LianL
+ * @author Lian Asher Caraang - Main Actions and Attributes for a singular UNOCard needed for the Game
  */
-public class UNOCard {
-
+public class UNOCard 
+{
+    //Variables
     private final CardColour cardColour;
     private final CardValue cardValue;
-
-    public UNOCard(CardColour cardColour, CardValue cardValue) {
+    
+    //Constructor requiring cardColour and cardValue
+    public UNOCard(CardColour cardColour, CardValue cardValue) 
+    {
         this.cardColour = cardColour;
         this.cardValue = cardValue;
     }
-
-    public CardColour getColour() {
+    
+    //Returns the card colour
+    public CardColour getColour() 
+    {
         return this.cardColour;
     }
-
-    public CardValue getValue() {
+    
+    //Returns the card value
+    public CardValue getValue() 
+    {
         return this.cardValue;
     }
-
+    
+    //Returns the full string that has the full card colour and value
+    @Override
     public String toString() {
         return cardColour + " " + cardValue;
     }

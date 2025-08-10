@@ -6,21 +6,34 @@ package model;
 
 /**
  *
- * @author LianL, Cuong Luong
+ * @author Lian Asher Caraang, Cuong Luong - CardColourHelper 
+ * Helper Class is in conjunction with the CardColour enumeration, for attributes and main functions 
  */
-public class CardColourHelper {
-
+public class CardColourHelper 
+{
+    //Array of available card colours
     private static final CardColour[] cardColours = CardColour.values();
-
-    public static CardColour getColours(int i) {
+    
+    //Constructor
+    public CardColourHelper() 
+    {
+    }
+    
+    //Returns the colour of a card based on the input
+    public static CardColour getColours(int i) 
+    {
         return cardColours[i];
     }
-
-    public static boolean isWild(CardColour colour) {
+    
+    //Returns true if the card colour is a wild card
+    public static boolean isWild(CardColour colour) 
+    {
         return colour == CardColour.WILD;
     }
-
-    public static boolean isMatchingColour(CardColour c1, CardColour c2) {
+    
+    //Returns true if the card colour matches the stockPile card colour
+    public static boolean isMatchingColour(CardColour c1, CardColour c2) 
+    {
         return c1 == c2;
     }
 }

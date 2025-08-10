@@ -11,40 +11,54 @@ import model.Player;
 import model.UNOCard;
 import view.PlayerView;
 
-/**
+/* HandController the player's hands generation and card removal and addition
+ * usernames and passwords
  *
- * @author LianL
+ * @author Cuong Luong, Lian Asher Caraang August 2025
  */
-public class HandController {
-
+public class HandController 
+{
+    
+    //Controller Variables
     DeckController deckController;
+    
+    //View Variables
     PlayerView playerView;
-
-    public HandController(DeckController deckController, PlayerView playerView) {
+    
+    //Constructor
+    public HandController(DeckController deckController, PlayerView playerView) 
+    {
         this.deckController = deckController;
         this.playerView = playerView;
     }
-
-    public void generatePlayerHand(Player player) {
+    
+    //Method to generate a new hand of 7 UNOCard objects for a player
+    public void generatePlayerHand(Player player) 
+    {
         UNOCard[] hand = deckController.drawCard(7);
         player.setPlayerHand(hand);
         playerView.showPlayerhand(player);
     }
-
-    public void removeCardFromHand(Player player, UNOCard card) {
+    
+    //Method to remove a card from a player's hand based on the UNOCard inputted
+    public void removeCardFromHand(Player player, UNOCard card) 
+    {
+        //Creates a new hand of UNoCard and then converts it to a list to make addition and removal easier
         UNOCard[] hand = player.getPlayerHand();
         List<UNOCard> handList = new ArrayList<>(Arrays.asList(hand));
-        if (handList.remove(card)) {
-            player.setPlayerHand(handList.toArray(new UNOCard[0]));
+        
+        if (handList.remove(card)) //After removal, it sets the new hand for the player
+        {
+            player.setPlayerHand(handList.toArray(new UNOCard[0])); 
         }
     }
-
-    public void addCardToHand(Player player, UNOCard card) {
-        // Assuming Player class has getPlayerHand() returning a List or array
-        // If playerHand is an array, you might want to convert to List or manage resizing
+    
+    //Method to add a card from a player's hand based on the UNOCard inputted
+    public void addCardToHand(Player player, UNOCard card) 
+    {
+        //Creates a new hand of UNoCard and then converts it to a list to make addition and removal easier
         List<UNOCard> hand = new ArrayList<>(Arrays.asList(player.getPlayerHand()));
         hand.add(card);
-        player.setPlayerHand(hand.toArray(new UNOCard[0]));
+        player.setPlayerHand(hand.toArray(new UNOCard[0])); //Sets the new player hand after addition
     }
-
 }

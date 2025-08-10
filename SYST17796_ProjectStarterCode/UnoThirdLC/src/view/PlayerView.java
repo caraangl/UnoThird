@@ -16,18 +16,20 @@ import model.UNOCard;
  *
  * @author Lian Asher Caraang & Ryleigh Smith August 2025
  */
-public class PlayerView {
-
+public class PlayerView 
+{
     //Input Variable
     Scanner input = new Scanner(System.in);
 
     //PlayerView Constructor
-    public PlayerView(Scanner input) {
+    public PlayerView(Scanner input) 
+    {
         this.input = input;
     }
 
     //getUsername Method - Prompts the user for a username and then sends the input
-    public String getUsername() {
+    public String getUsername() 
+    {
         System.out.println("\nPlease enter a username: "
                 + "\nNOTE: Username cannot include special characters.");
 
@@ -35,7 +37,8 @@ public class PlayerView {
     }
 
     //getPassword Method - Prompts the user for a password and then sends the input
-    public String getPassword() {
+    public String getPassword() 
+    {
         System.out.println("\nPlease enter a password: "
                 + "\nNOTE: Password cannot include special characters."
                 + "\nNOTE: Password must be 6 or more characters.");
@@ -43,24 +46,30 @@ public class PlayerView {
     }
 
     //showRegistrationSuccess Method - Displays successful registration message
-    public void showRegistrationSuccess() {
+    public void showRegistrationSuccess() 
+    {
         System.out.println("\nPlayer Registered Successfully.");
     }
 
     //showRegistrationFailure Method - Displays failed registration message
-    public void showRegistrationFailure(String message) {
+    public void showRegistrationFailure(String message) 
+    {
         System.out.println("\nPlayer Registration Rejected." + message);
     }
 
     //showRegisteredPlayers Method - Displays all of the currently registered players
-    public void showRegisteredPlayers(Game game) {
+    public void showRegisteredPlayers(Game game) 
+    {
         System.out.println("\nCurrent Players:");
         System.out.println(game.getPlayersString());
     }
-
-    public void showPlayerhand(Player player) {
+    
+    //showPlayerHand Method - Displays the current player's hand
+    public void showPlayerhand(Player player) 
+    {
         System.out.println("\n" + player.getUsername() + "'s hand:");
-        for (UNOCard card : player.getPlayerHand()) {
+        for (UNOCard card : player.getPlayerHand()) 
+        {
             System.out.println(card); // relies on UNOCard.toString()
         }
     }

@@ -20,7 +20,8 @@ public class StartView {
     }
 
     //showWelcomeMessage Method - Displays welcome message prompts the user for an action
-    public void showWelcomeMessage() {
+    public void showWelcomeMessage() 
+    {
         System.out.println("Welcome to UNO! \nPlease select an option:");
         System.out.println("1. Play UNO!");
         System.out.println("2. Exit UNO!");
@@ -28,12 +29,14 @@ public class StartView {
     }
 
     //showExitMessage() Method - Displays exit message
-    public void showExitMessage() {
+    public void showExitMessage() 
+    {
         System.out.println("Thanks for playing. \nGoodbye!");
     }
 
     //showInvalidMessage() Method - Displays invalid selection message
-    public void showInvalidMessage() {
-        System.out.println("Invalid Selection.");
+    public void showInvalidMessage() 
+    {
+        System.out.println("Invalid Selection. Please Enter 1 or 2!");
     }
 }

@@ -4,38 +4,46 @@
  */
 package model;
 
+//Imports
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author LianL
+ * @author Lian Asher Caraang - Main Actions and Attributes for a StockPile where the cards are matched and played 
  */
-public class StockPile {
-
+public class StockPile 
+{
+    //Attributes, using a List of UNOCard as the stockPile
     private final List<UNOCard> stockPile;
-
-    public StockPile() {
+    
+    //Constructor
+    public StockPile() 
+    {
         stockPile = new ArrayList<>();
     }
-
-    public void addCard(UNOCard card) {
+    
+    //Adds a card to the stockPile ArrayList
+    public void addCard(UNOCard card) 
+    {
         stockPile.add(card);
     }
-
-    public UNOCard getTopCard() {
-        if (stockPile.isEmpty()) {
+    //Gets the card at the top of the stockPile ArrayList
+    public UNOCard getTopCard() 
+    {
+        //If stock pile is currently empty, return null 
+        if (stockPile.isEmpty()) 
+        {
             return null;
         }
+        
+        //Return the top card of the ArrayList
         return stockPile.get(stockPile.size() - 1);
     }
-
-    public void clear() {
-        stockPile.clear();
-    }
-
-    // Get all cards (optional)
-    public List<UNOCard> getAllCards() {
+    
+    //Returns all of the cards of the stockPile ArrayList
+    public List<UNOCard> getAllCards() 
+    {
         return new ArrayList<>(stockPile);
     }
 }

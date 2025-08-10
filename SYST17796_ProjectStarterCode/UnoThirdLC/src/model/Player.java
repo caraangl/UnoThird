@@ -3,53 +3,72 @@ package model;
 import java.util.Scanner;
 
 /**
- * @author Ryleigh Smith August 2025
+ * @author Ryleigh Smith August 2025, Some Comments added by Lian Asher Caraang - Player Class that has all of the attributes needed
  */
-public class Player {
-
+public class Player 
+{
+    //Variables
     private String username;
     private Integer score;
     private String password;
     private UNOCard[] playerHand;
-
-    public Player() {
+    
+    //Constructor
+    public Player() 
+    {
     }
-
-    public Player(String username, String password) {
+    
+    //Overloaded Constructor
+    public Player(String username, String password) 
+    {
         this.username = username;
         this.password = password;
     }
-
-    public String getUsername() {
+    
+    //Returns player's username
+    public String getUsername() 
+    {
         return username;
     }
-
-    public int getScore() {
+    
+    //Returns player's score
+    public int getScore() 
+    {
         return score;
     }
-
-    public String getPassword() {
+    
+    //Returns player's password
+    public String getPassword() 
+    {
         return password;
     }
-
-    public void setUsername(String username) {
+    
+    //Sets the player's username
+    public void setUsername(String username) 
+    {
         this.username = username;
     }
-
-    public void setScore(int score) {
+    
+    //Sets the player's score
+    public void setScore(int score) 
+    {
         this.score = score;
     }
-
-    public void setPassword(String password) {
+    
+    //Sets the player's password
+    public void setPassword(String password) 
+    {
         this.password = password;
     }
-
-    public void setPlayerHand(UNOCard[] playerHand) {
+    
+    //Sets the player's Hand
+    public void setPlayerHand(UNOCard[] playerHand) 
+    {
         this.playerHand = playerHand;
     }
-
+    
+    //Gets the player's current Hand
     public UNOCard[] getPlayerHand() {
         return playerHand;
     }
-
 }
